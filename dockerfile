@@ -1,17 +1,9 @@
-version: '3'
-services:
-  webapache:
-    build:
-     context: .
-     dockerfile: dockerfile
-     args:
-      - NAME=Rajesh
-    image: ayushbikku91/ubuntu.apache:1
-    ports:
-      - "8000:80"
-    networks:
-      - webapache
-    volumes:
-      - /tmp:/var/www/html
-networks:
- webapache:
+ARG NAME=latest
+FROM ubuntu:$NAME
+ARG NAME
+MAINTAINER $NAME
+LABEL Name=$NAME
+LABEL Email="xyz@gmail.com"
+ENV NAME $NAME
+RUN apt-get -y update && apt-get -y install apache2 curl
+CMD apachectl -D FOREGROUND
