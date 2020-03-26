@@ -1,10 +1,9 @@
 ARG NAME=latest
-FROM centos:$NAME
-ARG NAME
+FROM ubuntu:$NAME
+ENV NAME omkar
 MAINTAINER $NAME
 LABEL Name=$NAME
 LABEL Email="ayush@gmail.com"
-ENV NAME $NAME
-RUN yum update-y update && yum install httpd -y
-RUN systemctl start httpd
+RUN echo "Ram Ram" > /var/www/html/
+RUN apt-get update && apt-get -y install apache2
 CMD apachectl -D FOREGROUND
